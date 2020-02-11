@@ -1,1 +1,18 @@
-qfewhgbgfcwh
+how to push sts code into github
+=================================
+
+1.right click on project then go to team ->add to index
+
+2.open git stagging 
+
+(or)
+
+windows -> show view ->git stagging
+
+3.git stagging  ->staged changes , commit msg  then commit
+
+4. Git Repositories (commit msg will be reflected here)
+
+right click -> push branch
+
+5. updates see in Github
