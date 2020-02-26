@@ -15,4 +15,4 @@ windows -> show view ->git stagging
 
 right click -> push branch
 
-5. updates see in Github
+5. updates will see in Github
