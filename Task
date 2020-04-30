@@ -1,0 +1,58 @@
+  
+  
+please ensure below steps in your pipeline
+1) Pull code from git
+2) Build the code
+3) Check for Sonar Tests and proceed if test succeeds
+4) Connect with Nexus repository to store artifacts
+5) run the Jar
+java -Dserver.port=8888 -jar myApplication.jar
+
+ 
+Learn Jenikis completely..
+build pipelines for Java and node applications..
+==================================================================================================================
+nexus is a repository that stores jar files in repository
+
+jenkins installation in linux
+===================================================================================================================
+https://medium.com/@mohan08p/install-and-configure-jenkins-on-amazon-ami-8617f0816444
+
+admin 
+admin123 
+Gop1n@d4
+
+sudo apt-get remove --purge icedtea-* openjdk-*
+
+sudo apt-get install mysql-server
+
+sudo netstat -plnt
+=================================================================================================================================
+node('master') {
+   
+        stage('Checkout')
+        {
+            git credentialsId: 'jenkins', url: 'https://github.com/BinduSri3/OnlineBankingSystem-DockerFile.git'
+        }
+        stage('Compile'){
+            sh 'mvn -f pom.xml clean'
+        }
+        stage('test'){
+            sh 'mvn -f pom.xml test'
+        }      
+		stage ('Code Quality') {
+        sh 'mvn -f pom.xml sonar:sonar'
+        }
+         stage('build'){
+            sh 'mvn -f pom.xml install'
+            
+        }
+         stage('publish'){
+        nexusArtifactUploader artifacts: [[artifactId: 'OnlineBankingSystem', classifier: '', file: '/var/lib/jenkins/workspace/sample/target/OnlineBankingSystem-0.0.1-SNAPSHOT.jar', type: 'jar']], credentialsId: 'Nexus', groupId: 'com.cg', nexusUrl: 'ec2-3-81-49-30.compute-1.amazonaws.com:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'Nexus-Artifacts', version: '0.0.1'
+        
+       
+    
+    // some block
+}
+
+}
